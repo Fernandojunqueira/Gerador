@@ -1,6 +1,16 @@
 const gerador = document.querySelector('button')
 const listOrdenada = document.querySelector('ol')
 const modal = document.querySelector('.modal')
+const limpar = document.querySelector('.limpar')
+const input = document.querySelectorAll('input')
+console.log(limpar)
+
+limpar.addEventListener('click', (event) => {
+    event.preventDefault()
+    input.forEach( element => {
+        element.value = ''
+    })
+})
 
 modal.addEventListener('click',(event) => {
 
@@ -35,3 +45,4 @@ function revertendoLista(string){
 
     return arrReverse
 }
+

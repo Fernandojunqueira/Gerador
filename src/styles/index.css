@@ -55,3 +55,7 @@ ol{
 .hidden{
     display: none;
 }
+.limpar{
+    background-color: red;
+    color: white;
+}
