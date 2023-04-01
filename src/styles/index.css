@@ -59,3 +59,6 @@ ol{
     background-color: #D10000;
     color: white;
 }
+li{
+    min-width: 274px;
+}

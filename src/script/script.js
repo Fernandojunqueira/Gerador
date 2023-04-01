@@ -3,7 +3,6 @@ const listOrdenada = document.querySelector('ol')
 const modal = document.querySelector('.modal')
 const limpar = document.querySelector('.limpar')
 const input = document.querySelectorAll('input')
-console.log(limpar)
 
 limpar.addEventListener('click', (event) => {
     event.preventDefault()
@@ -19,30 +18,70 @@ modal.addEventListener('click',(event) => {
     }
 })
 
-gerador.addEventListener('click', (event) => {
-    event.preventDefault()
-    listOrdenada.innerHTML = ''
-    const modal = document.querySelector('.modal')
-    modal.classList.toggle('hidden')
-    const primeiraFila = document.querySelectorAll('input')
-    primeiraFila.forEach(element  => {
+function geradorAli({fila__um,fila__dois}){
 
-        let string = revertendoLista(element.value)
+    const array = revertendoLista(fila__um)
+    const array2 = revertendoLista(fila__dois)
 
-        string.forEach(element => {
+    array.forEach((element,index) => {
+        if(index === array.length-1){
             const tagLi = document.createElement('li')
-            tagLi.innerText = element
-            listOrdenada.appendChild(tagLi)          
-        })
+            tagLi.innerText = `${index+1} ${element} (Último da primeira fila)`
+            listOrdenada.appendChild(tagLi) 
+        }else{
+            const tagLi = document.createElement('li')
+            tagLi.innerText = `${index+1} ${element}`
+            listOrdenada.appendChild(tagLi) 
+        }
         
     })
-})
 
-function revertendoLista(string){
-    let arr = string.split(',')
+    const p = document.createElement('p')
+    listOrdenada.appendChild(p)
 
-    let arrReverse = arr.reverse()
+    array2.forEach((element,index) => {
+        if(index === 0){
+            const tagLi = document.createElement('li')
+            tagLi.innerText = `${index+1} ${element} (Primeiro da segunda fila)`
+            listOrdenada.appendChild(tagLi) 
+        }else{
+            const tagLi = document.createElement('li')
+            tagLi.innerText = `${index+1} ${element}`
+            listOrdenada.appendChild(tagLi) 
+        }
+    })
+    
+}
 
-    return arrReverse
+function montandoObjeto(){
+    const form = document.getElementsByTagName('form')[0]
+  
+    form.addEventListener('submit', (event) => {
+
+        event.preventDefault()
+        
+        const inputs = [...event.target]
+
+        const data = new Object()
+
+        inputs.forEach((element) => {
+            if(element.name){
+                data[element.id] = element.value.split(',')
+            }
+        })
+
+       const modal = document.querySelector('.modal')
+       modal.classList.toggle('hidden')
+       geradorAli(data)
+        
+    })
+}
+montandoObjeto()
+
+function revertendoLista(array){
+
+    let arr = array.reverse()
+
+    return arr
 }
 
