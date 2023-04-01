@@ -24,6 +24,9 @@ function geradorAli({fila__um,fila__dois}){
     const array2 = revertendoLista(fila__dois)
 
     array.forEach((element,index) => {
+
+        listOrdenada.innerHTML = ''
+        
         if(index === array.length-1){
             const tagLi = document.createElement('li')
             tagLi.innerText = `${index+1} ${element} (Último da primeira fila)`
